@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/portfolio/static/css/main.e6c13ad2.css",
+    "main.js": "/portfolio/static/js/main.1929f9dd.js",
+    "static/js/787.1ed0c42c.chunk.js": "/portfolio/static/js/787.1ed0c42c.chunk.js",
+    "static/media/coindom-full.png": "/portfolio/static/media/coindom-full.c5fef9ca2f47e52897f8.png",
+    "static/media/avatar.jpg": "/portfolio/static/media/avatar.ba65b9ee3d56d4b4d892.jpg",
+    "static/media/about-img.webp": "/portfolio/static/media/about-img.62b47e7f183d4b4e9feb.62b47e7f183d4b4e9feb.webp",
+    "static/media/react.svg": "/portfolio/static/media/react.afac9c43724070bf6674f2692b7356a9.svg",
+    "index.html": "/portfolio/index.html",
+    "static/media/javascript.svg": "/portfolio/static/media/javascript.de4c2594613e34b15666206bbede7327.svg",
+    "static/media/figma.svg": "/portfolio/static/media/figma.d8e11e391a62a9686ea585915c747d73.svg",
+    "static/media/css.svg": "/portfolio/static/media/css.9cecabbf6ce67609c48bc4f280a11002.svg",
+    "static/media/mui.svg": "/portfolio/static/media/mui.456bfb02539777f812137c514d397868.svg",
+    "static/media/html.svg": "/portfolio/static/media/html.6e7b1b463015c056aeb9a624c8dc2876.svg",
+    "main.e6c13ad2.css.map": "/portfolio/static/css/main.e6c13ad2.css.map",
+    "main.1929f9dd.js.map": "/portfolio/static/js/main.1929f9dd.js.map",
+    "787.1ed0c42c.chunk.js.map": "/portfolio/static/js/787.1ed0c42c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.1929f9dd.js"
+  ]
+}
