@@ -1,56 +1,73 @@
 import React from "react";
 import { Typography, Box, Container } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { styled } from "@mui/system";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import Image from "../../assets/images/about-img.62b47e7f183d4b4e9feb.webp";
+import image from "../../assets/images/about-img.62b47e7f183d4b4e9feb.webp";
+
+const BoxWrapper = styled(Box) (({ theme }) => ({
+  backgroundColor: theme.backgroundColor,
+  padding: "40px",
+}))
+
+const ContainerBox = styled(Box) (({theme}) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "40px",
+  gap: 20,
+  flexDirection: 'row',
+  [theme.breakpoints.down("lg")]:{
+    flexDirection: 'column',
+    textAlign: 'center',
+  }
+}))
+
+const Image = styled(Box) (({theme}) => ({
+  backgroundImage: `url(${image})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  maxWidth: "31rem",
+  width: '100%',
+  height: "25rem",
+  borderRadius: "1.7rem",
+  flexShrink: 0,
+  [theme.breakpoints.down("md")]:{
+    marginBottom: "30px",
+    height: "15rem",
+  }
+}))
+
+const AboutHeading = styled(Typography) (({ theme }) => ({
+  color: theme.palette.primary.main,
+  fontWeight: 600,
+}));
+
+const AboutTitle = styled(Typography) ({
+  margin: "16px 0",
+  fontWeight: 600,
+})
+
+const Desc = styled(Typography) (({theme}) => ({
+  color: theme.palette.text.secondary,
+  [theme.breakpoints.down("md")]:{
+  }
+}))
 
 const About = () => {
-  const theme = useTheme();
   return (
-    <>
-      <Box id="About" sx={{ backgroundColor: theme.backgroundColor, p: 5 }}>
+      <BoxWrapper id="About">
         <Container>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              p: 5,
-            }}
-          >
-            <Box
-              component="img"
-              sx={{
-                backgroundImage: `url(${Image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                width: "31rem",
-                height: "25rem",
-                borderRadius: "1.7rem",
-              }}
-            />
-            <Box sx={{ width: 500 }}>
-              <Typography
-                variant="h6"
-                component="h6"
-                color="primary"
-                sx={{ fontWeight: 600 }}
-              >
+          <ContainerBox>
+            <Image component="img"/>
+            <Box sx={{ maxWidth: "31rem" }}>
+              <AboutHeading variant="h6">
                 About me
-              </Typography>
-              <Typography
-                variant="h5"
-                component="h5"
-                sx={{ my: 2, fontWeight: 600 }}
-              >
+              </AboutHeading>
+              <AboutTitle variant="h5">
                 A dedicated Front-end Developer based in Taganrog, Russia
                 <BookmarkIcon color="error" />
-              </Typography>
-              <Typography
-                variant="p"
-                component="p"
-                sx={{ color: "text.secondary" }}
-              >
+              </AboutTitle>
+              <Desc variant="body1">
                 As a Front-End developer, I have some arsenal of skills in HTML,
                 CSS, JavaScript, React and Mui. I excel at developing and
                 maintaining responsive websites that provide a smooth user
@@ -59,12 +76,11 @@ const About = () => {
                 advanced development tools and techniques. I am also a team
                 player who excels at collaborating with cross-functional teams
                 to create outstanding web applications.
-              </Typography>
+              </Desc>
             </Box>
-          </Box>
+          </ContainerBox>
         </Container>
-      </Box>
-    </>
+      </BoxWrapper>
   );
 };
 

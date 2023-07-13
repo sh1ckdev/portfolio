@@ -6,190 +6,226 @@ import {
   List,
   ListItemIcon,
   Divider,
+  useMediaQuery
 } from "@mui/material";
 import { WavingHandTwoTone, Telegram, GitHub } from "@mui/icons-material";
-import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/system";
+import { keyframes } from '@emotion/react';
 import avatarImage from "../../assets/images/avatar.jpg";
 
-const useStyles = makeStyles((theme) => ({
-  stackIcon: {
-    backgroundColor: theme.backgroundColor,
-    boxShadow: theme.shadows,
-    borderRadius: "50%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "4rem",
-    width: "4rem",
-    margin: "1rem",
+const BoxWrapper = styled(Box) (({theme}) => ({
+  display: "flex",
+  marginTop: "120px",
+  alignItems: "center",
+  justifyContent: "space-between",
+  flexDirection: "row", 
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column-reverse",
   },
-  avatarAnimation: {
-    animation: "$morph 8s ease-in-out infinite",
-    backgroundImage: `url(${avatarImage})`,
-    backgroundPosition: "50%",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
-    height: "25rem",
-    position: "relative",
-    transition: "all 1s ease-in-out",
-    width: "25rem",
+}))
+
+const StackIcon = styled(ListItemIcon) (({ theme }) =>({
+  backgroundColor: theme.backgroundColor,
+  boxShadow: theme.shadows,
+  borderRadius: "50%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  height: "4rem",
+  width: "4rem",
+  margin: "1rem",
+}))
+
+const morphAnimation = keyframes`
+  0% {
+    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  }
+`;
+
+const AvatarAnimation = styled(Box)({
+  animation: `${morphAnimation} 8s ease-in-out infinite`,
+  backgroundImage: `url(${avatarImage})`,
+  backgroundPosition: "50%",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
+  height: "25rem",
+  position: "relative",
+  transition: "all 1s ease-in-out",
+  width: "25rem",
+  padding: "40px"
+});
+
+const WavingHandTwoToneIcon = styled(WavingHandTwoTone) (({ theme }) => ({
+  color: theme.palette.primary.main,
+  fontSize: "3.2rem",
+}))
+
+const MainText = styled(Typography) (({ theme }) => ({
+  fontWeight: 600,
+  fontSize: "4rem",
+  color: theme.palette.text.primary,
+}))
+
+const MainDesc = styled(Typography) (({ theme }) => ({
+  color: theme.palette.text.secondary,
+  fontSize: "1.3rem",
+  margin: "24px 0",
+}))
+
+const ContentBox = styled(Box) (({ theme }) =>({
+  marginTop: "40px",
+  maxWidth: 500,
+  [theme.breakpoints.down("md")]: {
+    textAlign: 'center',
+  }
+}))
+
+const GitHubIcon = styled(GitHub) (({ theme }) =>({
+  fontSize: 40,
+  cursor: "pointer",
+  color: theme.palette.text.primary,
+  transition: "color 0.3s",
+  "&:hover": {
+    color: theme.palette.primary.main,
+  }
+}))
+
+const TelegramIcon = styled(Telegram) (({ theme }) =>({
+  fontSize: 40,
+  cursor: "pointer",
+  color: theme.palette.text.primary,
+  transition: "color 0.3s",
+  "&:hover": {
+    color: theme.palette.primary.main,
+  }
+}))
+
+const IconBox = styled(Box) ({
+  display: 'inline-flex',
+  gap: 10
+})
+
+const ListBox = styled(List) (({theme}) => ({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "row",
+  [theme.breakpoints.down("md")]: {
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      gap: 10
   },
-  "@keyframes morph": {
-    "0%": {
-      borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
-    },
-    "50%": {
-      borderRadius: "30% 60% 70% 40%/50% 60% 30% 60%",
-    },
-    "100%": {
-      borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%",
-    },
+}))
+
+const StackText = styled(Typography) (({ theme }) => ({
+  color: theme.palette.text.primary,
+  fontSize: "1.3rem",
+  fontWeight: 600,
+  marginRight: '20px',
+  [theme.breakpoints.down("md")]:{
+    margin: "30px 0 10px 0"
+  }
+}))
+
+const StackBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  padding: '20px',
+  flexDirection: "row",
+  alignItems: 'center',
+  [theme.breakpoints.down("md")]:{
+    flexDirection: "column",
   },
 }));
 
-const Hero = () => {
-  const classes = useStyles();
 
+const HeroCard = ({src, alt}) => {
+  return (
+        <StackIcon >
+          <img
+            src={src}
+            alt={alt}
+            height="30"
+          />
+        </StackIcon>
+  )
+}
+
+const Hero = () => {
+  const HeroData = [
+    {
+      src:  require("../../assets/images/html.svg").default,
+      alt: "HTML"
+    },
+    {
+      src:  require("../../assets/images/css.svg").default,
+      alt: "HTML"
+    },
+    {
+      src:  require("../../assets/images/react.svg").default,
+      alt: "HTML"
+    },
+    {
+      src:  require("../../assets/images/mui.svg").default,
+      alt: "HTML"
+    },
+    {
+      src:  require("../../assets/images/javascript.svg").default,
+      alt: "HTML"
+    },
+    {
+      src:  require("../../assets/images/figma.svg").default,
+      alt: "HTML"
+    }
+  ]
+  
+  
   return (
     <Container maxWidth="lg">
-      <Box
-        id="Hero"
-        sx={{
-          display: "flex",
-          mt: 15,
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <Box
-          sx={{
-            mt: 5,
-            maxWidth: 500,
-          }}
-        >
-          <Typography
-            variant="h2"
-            component="h2"
-            sx={{
-              fontWeight: 600,
-              fontSize: "4rem",
-              color: (theme) => theme.palette.text.primary,
-            }}
-          >
+      <BoxWrapper id="Hero">
+        <ContentBox>
+          <MainText variant="h2" component="h2">
             FrontEnd React Developer{" "}
-            <WavingHandTwoTone
-              sx={{
-                color: (theme) => theme.palette.primary.main,
-                fontSize: "3.2rem",
-              }}
-            />
-          </Typography>
-          <Typography
-            sx={{
-              color: (theme) => theme.palette.text.secondary,
-              fontSize: "1.3rem",
-              my: 3,
-            }}
-          >
+            <WavingHandTwoToneIcon/>
+          </MainText>
+          <MainDesc>
             Hi, I'm Alexey Cherman. A passionate Frontend Developer based in
             Taganrog, Russia.
-          </Typography>
-          <Box>
-            <GitHub
-              sx={{
-                fontSize: 40,
-                cursor: "pointer",
-                marginRight: "0.5rem",
-                color: (theme) => theme.palette.text.primary,
-                transition: "color 0.3s",
-                "&:hover": {
-                  color: (theme) => theme.palette.primary.main,
-                },
-              }}
+          </MainDesc>
+          <IconBox>
+            <GitHubIcon
               onClick={() => {
                 window.open("https://github.com/", "_blank");
               }}
             />
-            <Telegram
-              sx={{
-                fontSize: 40,
-                cursor: "pointer",
-                color: (theme) => theme.palette.text.primary,
-                transition: "color 0.3s",
-                "&:hover": {
-                  color: (theme) => theme.palette.primary.main,
-                },
-              }}
+            <TelegramIcon
               onClick={() => {
                 window.open("https://t.me/", "_blank");
               }}
             />
-          </Box>
-        </Box>
-        <Box className={classes.avatarAnimation}></Box>
-      </Box>
-      <List
-        sx={{
-          display: "flex",
-          my: 3,
-          alignItems: "center",
-        }}
-      >
-        <Typography
-          sx={{
-            color: (theme) => theme.palette.text.primary,
-            fontSize: "1.3rem",
-            fontWeight: 600,
-            mr: 3,
-          }}
-        >
+          </IconBox>
+        </ContentBox>
+        <AvatarAnimation />
+      </BoxWrapper>
+      <StackBox>
+      <StackText>
           My stack
-        </Typography>
-        <Divider orientation="vertical" flexItem />
-        <ListItemIcon className={classes.stackIcon}>
-          <img
-            src={require("../../assets/images/html.svg").default}
-            alt="HTML"
-            height="30"
-          />
-        </ListItemIcon>
-        <ListItemIcon className={classes.stackIcon}>
-          <img
-            src={require("../../assets/images/css.svg").default}
-            alt="CSS"
-            height="30"
-          />
-        </ListItemIcon>
-        <ListItemIcon className={classes.stackIcon}>
-          <img
-            src={require("../../assets/images/javascript.svg").default}
-            alt="JavaScript"
-            height="30"
-          />
-        </ListItemIcon>
-        <ListItemIcon className={classes.stackIcon}>
-          <img
-            src={require("../../assets/images/react.svg").default}
-            alt="React"
-            height="30"
-          />
-        </ListItemIcon>
-        <ListItemIcon className={classes.stackIcon}>
-          <img
-            src={require("../../assets/images/mui.svg").default}
-            alt="Material-UI"
-            height="30"
-          />
-        </ListItemIcon>
-        <ListItemIcon className={classes.stackIcon}>
-          <img
-            src={require("../../assets/images/figma.svg").default}
-            alt="Figma"
-            height="30"
-          />
-        </ListItemIcon>
-      </List>
+        </StackText>
+        <Divider orientation={useMediaQuery((theme)=>theme.breakpoints.down("md")) ? "horizontal" : "vertical"} flexItem />
+      <ListBox>
+        {HeroData.map((hero, index)=>(
+        <HeroCard key={index}
+        src={hero.src}
+        alt={hero.alt}
+        />
+        ))}
+      </ListBox>
+      </StackBox>
     </Container>
   );
 };

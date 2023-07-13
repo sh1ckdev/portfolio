@@ -5,13 +5,30 @@ import { styled } from "@mui/system";
 
 const BoxWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.backgroundColor,
-  padding: "40px"
+  padding: "40px",  
 }))
 
-const BlockWrapper = styled(Box) ({
+const BlockWrapper = styled(Box) (({theme}) =>({
   display: "flex",
   alignItems: "center",
-});
+  [theme.breakpoints.down("md")]: {
+    flexDirection: 'column',
+    textAlign: 'center'
+  }
+}));
+
+const ContactTitle = styled(Typography) ({
+  fontWeight: 600,
+  margin: "16px 0 32px 0"
+})
+
+const ListWrapper = styled(List) (({theme}) => ({
+  display: 'flex',
+  gap: 10,
+  [theme.breakpoints.down("md")]: {
+    flexDirection: 'column'
+  }
+}))
 
 const IconWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -49,10 +66,10 @@ const Contact = () => {
           <Typography variant="h6" component="h6" color="primary" fontWeight={600}>
             Contact
           </Typography>
-          <Typography variant="h4" component="h4" fontWeight={700} mt={2} mb={4}>
+          <ContactTitle variant="h4">
             Don't be shy! Hit me up!
-          </Typography>
-          <List sx={{ display: "flex", gap: 10 }}>
+          </ContactTitle>
+          <ListWrapper>
             <BlockWrapper>
               <IconWrapper>
                 <MapTwoTone sx={{ fontSize: 40 }} color="primary" />
@@ -82,7 +99,7 @@ const Contact = () => {
                 </CustomLink>
               </ContentWrapper>
             </BlockWrapper>
-          </List>
+          </ListWrapper>
         </Box>
       </Container>
     </BoxWrapper>

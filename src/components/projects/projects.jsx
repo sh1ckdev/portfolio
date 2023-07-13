@@ -9,66 +9,74 @@ import {
   CardContent,
   CardMedia,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/system";
 import { LaunchRounded, GitHub } from "@mui/icons-material";
 import ImageProjectFirst from "../../assets/images/coindom-full.png";
 
-const useStyles = makeStyles((theme) => ({
-  stack: {
-    backgroundColor: theme.backgroundColor,
-    boxShadow: theme.shadows,
-    fontWeight: "600!important",
-    padding: ".5rem .8rem",
+
+const Stack = styled(Typography) (({ theme }) => ({
+  backgroundColor: theme.backgroundColor,
+  boxShadow: theme.shadows,
+  fontWeight: "600!important",
+  padding: ".5rem .8rem",
+}))
+
+const CardWrapper = styled(Card) (({ theme, isReverse }) => ({
+  flexDirection: isReverse ? "row-reverse" : "row",
+  display: "flex",
+  alignItems: "center",
+  padding: "25px!important",
+  backgroundColor: `${theme.backgroundColor} !important`,
+  boxShadow: theme.shadows,
+  borderRadius: "20px!important",
+  gap: 50,
+  [theme.breakpoints.down("md")]:{
+    flexDirection: "column"
+  }
+}))
+
+const ImageBox = styled(Box) (({ theme })=>({
+  borderRadius: 16,
+  boxShadow: theme.shadows,
+  overflow: "hidden",
+  maxWidth: "35rem",
+  width: '100%',
+  height: "300px",
+}))
+
+const Image = styled(CardMedia) ({
+  width: "100%",
+  transform: "translateY(0%)",
+  transition: "transform 5s ease-in-out",
+  "&:hover": {
+    transform: "translateY(-79%)",
   },
-  contentLinks: {
-    textDecoration: "none!important",
-    display: "flex",
-    alignItems: "center",
-    fontWeight: "500 !important",
-    fontSize: "18px !important",
-    cursor: "pointer",
-    gap: "4px",
-    color: `${theme.palette.text.primary} !important`,
-    transition: "color 0.3s",
-    "&:hover": {
-      color: `${theme.palette.primary.main} !important`,
-    },
+  flexShrink: 0,
+})
+
+const ContentCard = styled(CardContent) ({
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 25,
+  padding: 0,
+})
+
+const ContentLinks = styled(Link) (({ theme }) =>({
+  textDecoration: "none!important",
+  display: "flex",
+  alignItems: "center",
+  fontWeight: "500 !important",
+  fontSize: "18px !important",
+  cursor: "pointer",
+  gap: "4px",
+  color: `${theme.palette.text.primary} !important`,
+  transition: "color 0.3s",
+  "&:hover": {
+    color: `${theme.palette.primary.main} !important`,
   },
-  card: {
-    display: "flex",
-    alignItems: "center",
-    padding: "25px!important",
-    backgroundColor: `${theme.backgroundColor} !important`,
-    boxShadow: theme.shadows,
-    borderRadius: "20px!important",
-    gap: 50,
-  },
-  imageBox: {
-    borderRadius: 16,
-    boxShadow: theme.shadows,
-    height: "auto",
-    overflow: "hidden",
-    width: "35rem",
-    height: "300px",
-  },
-  image: {
-    width: "100%",
-    transform: "translateY(0%)",
-    transition: "transform 5s ease-in-out",
-    "&:hover": {
-      transform: "translateY(-79%)",
-    },
-    flexShrink: 0,
-  },
-  cardContent: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: 25,
-    padding: 0,
-  },
-}));
+}))
 
 const ProjectCard = ({
   image,
@@ -79,7 +87,6 @@ const ProjectCard = ({
   stack,
   reverse,
 }) => {
-  const classes = useStyles();
   const handleCodeLinkClick = () => {
     window.open(codeLink, "_blank");
   };
@@ -89,16 +96,13 @@ const ProjectCard = ({
   };
 
   return (
-    <Card
-      className={classes.card}
-      sx={{ flexDirection: reverse ? "row-reverse" : "row" }}
-    >
-      <Box className={classes.imageBox}>
+    <CardWrapper isReverse={reverse}>
+      <ImageBox>
         <Link>
-          <CardMedia className={classes.image} component="img" image={image} />
+          <Image component="img" image={image} />
         </Link>
-      </Box>
-      <CardContent className={classes.cardContent}>
+      </ImageBox>
+      <ContentCard>
         <Typography variant="h5" sx={{ fontWeight: 600 }}>
           {title}
         </Typography>
@@ -110,23 +114,23 @@ const ProjectCard = ({
         </Typography>
         <Box sx={{ display: "flex", gap: 1 }}>
           {stack.map((tech, index) => (
-            <Typography key={index} className={classes.stack}>
+            <Stack key={index} >
               {tech}
-            </Typography>
+            </Stack>
           ))}
         </Box>
         <Box sx={{ display: "flex", gap: 3 }}>
-          <Link className={classes.contentLinks} onClick={handleCodeLinkClick}>
+          <ContentLinks  onClick={handleCodeLinkClick}>
             Code
             <GitHub />
-          </Link>
-          <Link className={classes.contentLinks} onClick={handleDemoLinkClick}>
+          </ContentLinks>
+          <ContentLinks onClick={handleDemoLinkClick}>
             Live Demo
             <LaunchRounded />
-          </Link>
+          </ContentLinks>
         </Box>
-      </CardContent>
-    </Card>
+      </ContentCard>
+    </CardWrapper>
   );
 };
 
@@ -159,7 +163,6 @@ const Projects = () => {
       demoLink: "https://",
       stack: ["React", "SCSS"],
     },
-    // Add more project data here
   ];
 
   return (
