@@ -13,6 +13,26 @@ import { styled } from "@mui/system";
 import { LaunchRounded, GitHub } from "@mui/icons-material";
 import ImageProjectFirst from "../../assets/images/coindom-full.png";
 
+const BoxWrapper = styled(Box) (({theme}) =>({
+  padding: "40px",
+  [theme.breakpoints.down("sm")]:{
+    padding: "40px 0",
+  }
+}))
+
+const ContentHeading = styled(Typography) (({theme}) =>({
+  color: theme.palette.primary.main,
+  fontWeight: 600,
+}))
+
+const ContentTitle = styled(Typography) (({theme}) =>({
+  fontWeight: 700,
+  marginTop: "16px", 
+  marginBottom: "32px",
+  [theme.breakpoints.down("sm")]:{
+    fontSize: 20
+  }
+}))
 
 const Stack = styled(Typography) (({ theme }) => ({
   backgroundColor: theme.backgroundColor,
@@ -124,7 +144,7 @@ const ProjectCard = ({
             Code
             <GitHub />
           </ContentLinks>
-          <ContentLinks onClick={handleDemoLinkClick}>
+          <ContentLinks onClick={handleDemoLinkClick} sx={{ whiteSpace: "nowrap"}}>
             Live Demo
             <LaunchRounded />
           </ContentLinks>
@@ -167,22 +187,15 @@ const Projects = () => {
 
   return (
     <Container>
-      <Box sx={{ p: 5 }}>
-        <Typography
-          variant="h6"
-          component="h6"
-          color="primary"
-          sx={{ fontWeight: 600 }}
-        >
+      <BoxWrapper>
+        <ContentHeading variant="h6">
           My Projects
-        </Typography>
-        <Typography
+        </ContentHeading>
+        <ContentTitle
           variant="h4"
-          component="h4"
-          sx={{ fontWeight: 700, mt: 2, mb: 4 }}
         >
           Each project is a unique piece of development
-        </Typography>
+        </ContentTitle>
 
         <Grid container spacing={10}>
           {projectData.map((project, index) => (
@@ -199,7 +212,7 @@ const Projects = () => {
             </Grid>
           ))}
         </Grid>
-      </Box>
+      </BoxWrapper>
     </Container>
   );
 };

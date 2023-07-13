@@ -7,6 +7,9 @@ import image from "../../assets/images/about-img.62b47e7f183d4b4e9feb.webp";
 const BoxWrapper = styled(Box) (({ theme }) => ({
   backgroundColor: theme.backgroundColor,
   padding: "40px",
+  [theme.breakpoints.down("sm")]:{
+    padding: "20px",
+  }
 }))
 
 const ContainerBox = styled(Box) (({theme}) => ({
@@ -19,6 +22,7 @@ const ContainerBox = styled(Box) (({theme}) => ({
   [theme.breakpoints.down("lg")]:{
     flexDirection: 'column',
     textAlign: 'center',
+    padding: 0,
   }
 }))
 
@@ -42,14 +46,18 @@ const AboutHeading = styled(Typography) (({ theme }) => ({
   fontWeight: 600,
 }));
 
-const AboutTitle = styled(Typography) ({
+const AboutTitle = styled(Typography) (({theme}) =>({
   margin: "16px 0",
   fontWeight: 600,
-})
+  [theme.breakpoints.down("sm")]:{
+    fontSize: 20
+  }
+}))
 
 const Desc = styled(Typography) (({theme}) => ({
   color: theme.palette.text.secondary,
-  [theme.breakpoints.down("md")]:{
+  [theme.breakpoints.down("sm")]:{
+    fontSize: 14
   }
 }))
 

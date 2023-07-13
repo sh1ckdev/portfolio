@@ -48,7 +48,7 @@ const morphAnimation = keyframes`
   }
 `;
 
-const AvatarAnimation = styled(Box)({
+const AvatarAnimation = styled(Box) (({theme}) =>({
   animation: `${morphAnimation} 8s ease-in-out infinite`,
   backgroundImage: `url(${avatarImage})`,
   backgroundPosition: "50%",
@@ -59,24 +59,37 @@ const AvatarAnimation = styled(Box)({
   position: "relative",
   transition: "all 1s ease-in-out",
   width: "25rem",
-  padding: "40px"
-});
+  padding: "40px",
+  [theme.breakpoints.down("sm")]: {
+    width: "20rem",
+    height: "20rem",
+  }
+}));
 
 const WavingHandTwoToneIcon = styled(WavingHandTwoTone) (({ theme }) => ({
   color: theme.palette.primary.main,
   fontSize: "3.2rem",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "2rem",
+  }
 }))
 
 const MainText = styled(Typography) (({ theme }) => ({
   fontWeight: 600,
   fontSize: "4rem",
   color: theme.palette.text.primary,
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "2rem"
+  }
 }))
 
 const MainDesc = styled(Typography) (({ theme }) => ({
   color: theme.palette.text.secondary,
   fontSize: "1.3rem",
   margin: "24px 0",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "1rem",
+  }
 }))
 
 const ContentBox = styled(Box) (({ theme }) =>({
@@ -94,7 +107,7 @@ const GitHubIcon = styled(GitHub) (({ theme }) =>({
   transition: "color 0.3s",
   "&:hover": {
     color: theme.palette.primary.main,
-  }
+  },
 }))
 
 const TelegramIcon = styled(Telegram) (({ theme }) =>({

@@ -17,10 +17,13 @@ const BlockWrapper = styled(Box) (({theme}) =>({
   }
 }));
 
-const ContactTitle = styled(Typography) ({
+const ContactTitle = styled(Typography) (({theme}) =>({
   fontWeight: 600,
-  margin: "16px 0 32px 0"
-})
+  margin: "16px 0 32px 0",
+  [theme.breakpoints.down("sm")]:{
+    fontSize: 20
+  }
+}))
 
 const ListWrapper = styled(List) (({theme}) => ({
   display: 'flex',

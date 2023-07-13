@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   AppBar as MuiAppBar,
-  Toolbar,
+  Toolbar as MuiToolbar,
   Typography,
   Button,
   Box,
@@ -27,8 +27,13 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
   boxShadow: theme.shadows,
 }));
 
+const Toolbar = styled(MuiToolbar) ({
+  padding: 0
+})
+
 const MenuIconButton = styled(IconButton)({
   marginRight: "0",
+  padding: 0
 });
 
 const ButtonBox = styled(Box)({

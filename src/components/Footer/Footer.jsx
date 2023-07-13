@@ -9,16 +9,20 @@ const BoxWrapper = styled(Box) (({ theme }) => ({
   padding: "24px",
 }))
 
-const ContainerBox = styled(Box) ({
+const ContainerBox = styled(Box) (({theme}) =>({
   padding: "40px", 
   display: "flex", 
-  justifyContent: "space-between" 
-})
+  alignItems: 'center',
+  justifyContent: "space-between",
+  [theme.breakpoints.down("sm")]:{
+    flexDirection: "column-reverse", 
+    padding: '40px 0'
+  }
+}))
 
 const GitHubIcon = styled(GitHub) ({
   fontSize: 40,
   cursor: "pointer",
-  marginRight: "0.5rem",
   color: "#fff",
   transition: "transform 0.3s",
   "&:hover": {
@@ -29,12 +33,25 @@ const GitHubIcon = styled(GitHub) ({
 const TelegramIcon = styled(Telegram) ({
   fontSize: 40,
   cursor: "pointer",
-  marginRight: "0.5rem",
   color: "#fff",
   transition: "transform 0.3s",
   "&:hover": {
     transform: "scale(1.3)",
   },
+})
+
+const Copyright = styled(Typography) (({theme}) =>({
+  fontWeight: 600,
+  color: "#fff",
+  [theme.breakpoints.down("sm")]:{
+    fontSize: 14
+  }
+}))
+
+const BoxIcon = styled(Box) ({
+  display: 'flex',
+  gap: 10,
+  padding: '20px',
 })
 
 const Contact = () => {
@@ -43,16 +60,10 @@ const Contact = () => {
       <BoxWrapper component="footer">
         <Container>
           <ContainerBox>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 600,
-                color: "#fff",
-              }}
-            >
+            <Copyright variant="h6">
               &copy; {currentYear} sh1ckdev. All rights reserved.
-            </Typography>
-            <Box>
+            </Copyright>
+            <BoxIcon>
               <GitHubIcon
                 onClick={() => {
                   window.open("https://github.com/", "_blank");
@@ -63,7 +74,7 @@ const Contact = () => {
                   window.open("https://t.me/", "_blank");
                 }}
               />
-            </Box>
+            </BoxIcon>
           </ContainerBox>
         </Container>
       </BoxWrapper>
