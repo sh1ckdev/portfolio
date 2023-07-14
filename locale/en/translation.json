@@ -1,0 +1,40 @@
+{
+    "navbar":{
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "contact": "Contact me"
+    },
+    "hero":{
+        "maintext": "FrontEnd React Developer",
+        "maindesc": "Hi, I'm Alexey Cherman. A passionate Frontend Developer based in Taganrog, Russia.",
+        "steck": "My stack"
+    },
+    "about":{
+        "aboutheading": "About me",
+        "abouttitle": "A dedicated Front-end Developer based in Taganrog, Russia",
+        "aboutdesc": "As a Front-End developer, I have some arsenal of skills in HTML, CSS, JavaScript, React and Mui. I excel at developing and maintaining responsive websites that provide a smooth user experience. My experience is in creating dynamic, attractive interfaces by writing clean and optimized code and using advanced development tools and techniques. I am also a team player who excels at collaborating with cross-functional teams to create outstanding web applications."
+    },
+    "projects":{
+        "projectsheading": "My Projects",
+        "projectstitle": "Each project is a unique piece of development",
+        "projectcard":{
+            "project1":{
+                "title": "CoinDom",
+                "desc": "Coindom is a crypto app that allows users to search for information about various cryptocurrencies in real-time."
+            }
+        }
+    },
+    "contact":{
+        "contactheading": "Contact",
+        "contacttitle": "Don't be shy! Hit me up!",
+        "location": {
+            "title": "Location",
+            "geo": "Taganrog, Russia"
+        }
+
+    },
+    "footer":{
+        "copyright": "sh1ckdev. All rights reserved."
+    }
+}
