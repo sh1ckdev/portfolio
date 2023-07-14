@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { LaunchRounded, GitHub } from "@mui/icons-material";
+import { useTranslation } from 'react-i18next';
 import ImageProjectFirst from "../../assets/images/coindom-full.png";
 
 const BoxWrapper = styled(Box) (({theme}) =>({
@@ -155,30 +156,28 @@ const ProjectCard = ({
 };
 
 const Projects = () => {
+  const { t } = useTranslation();
   const projectData = [
     {
       image: ImageProjectFirst,
-      title: "CoinDom",
-      description:
-        "Coindom is a crypto app that allows users to search for information about various cryptocurrencies in real-time.",
+      title: t('projects.projectcard.project1.title'),
+      description: t('projects.projectcard.project1.desc'),
       codeLink: "https://github.com/",
       demoLink: "https://",
       stack: ["React", "SCSS"],
     },
     {
       image: ImageProjectFirst,
-      title: "CoinDom",
-      description:
-        "Coindom is a crypto app that allows users to search for information about various cryptocurrencies in real-time.",
+      title: t('projects.projectcard.project1.title'),
+      description: t('projects.projectcard.project1.desc'),
       codeLink: "https://github.com/",
       demoLink: "https://",
       stack: ["React", "SCSS"],
     },
     {
       image: ImageProjectFirst,
-      title: "CoinDom",
-      description:
-        "Coindom is a crypto app that allows users to search for information about various cryptocurrencies in real-time.",
+      title: t('projects.projectcard.project1.title'),
+      description: t('projects.projectcard.project1.desc'),
       codeLink: "https://github.com/",
       demoLink: "https://",
       stack: ["React", "SCSS"],
@@ -189,12 +188,10 @@ const Projects = () => {
     <Container>
       <BoxWrapper>
         <ContentHeading variant="h6">
-          My Projects
+        {t('projects.projectsheading')}
         </ContentHeading>
-        <ContentTitle
-          variant="h4"
-        >
-          Each project is a unique piece of development
+        <ContentTitle variant="h4">
+        {t('projects.projectstitle')}
         </ContentTitle>
 
         <Grid container spacing={10}>

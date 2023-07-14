@@ -26,7 +26,7 @@ const App = () => {
           },
         },
         typography: {
-          fontFamily: "Poppins",
+          fontFamily: "Montserrat",
           color: darkMode ? "#f9f9f9" : "#2d2e32",
         },
         shadows: darkMode ? ["0 0 10px rgba(255, 255, 255, 0.1)"] : ["0 0 10px rgba(0, 0, 0, 0.1)"],

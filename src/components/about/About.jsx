@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Box, Container } from "@mui/material";
 import { styled } from "@mui/system";
+import { useTranslation } from 'react-i18next';
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import image from "../../assets/images/about-img.62b47e7f183d4b4e9feb.webp";
 
@@ -62,6 +63,7 @@ const Desc = styled(Typography) (({theme}) => ({
 }))
 
 const About = () => {
+  const { t } = useTranslation();
   return (
       <BoxWrapper id="About">
         <Container>
@@ -69,21 +71,14 @@ const About = () => {
             <Image component="img"/>
             <Box sx={{ maxWidth: "31rem" }}>
               <AboutHeading variant="h6">
-                About me
+              {t('about.aboutheading')}
               </AboutHeading>
               <AboutTitle variant="h5">
-                A dedicated Front-end Developer based in Taganrog, Russia
+              {t('about.abouttitle')}
                 <BookmarkIcon color="error" />
               </AboutTitle>
               <Desc variant="body1">
-                As a Front-End developer, I have some arsenal of skills in HTML,
-                CSS, JavaScript, React and Mui. I excel at developing and
-                maintaining responsive websites that provide a smooth user
-                experience. My experience is in creating dynamic, attractive
-                interfaces by writing clean and optimized code and using
-                advanced development tools and techniques. I am also a team
-                player who excels at collaborating with cross-functional teams
-                to create outstanding web applications.
+              {t('about.aboutdesc')}
               </Desc>
             </Box>
           </ContainerBox>

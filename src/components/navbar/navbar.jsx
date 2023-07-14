@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useTranslation } from 'react-i18next';
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   position: "fixed",
@@ -98,6 +99,10 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const Navbar = ({ darkMode, toggleDarkMode }) => {
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (language) => {
+    i18n.changeLanguage(language);
+  };
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
@@ -114,7 +119,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
       <Container maxWidth="lg">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography variant="h4" sx={{ fontFamily: "Rock Salt" }}>
-            shick .dev
+          shick .dev
           </Typography>
           {isMobile ? (
             <>
@@ -129,32 +134,36 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
               <Drawer anchor="right" open={isMenuOpen} onClose={handleMenuClose}>
                 <List>
                   <ListItem button component="a" href="#Hero" onClick={handleMenuClose}>
-                    <ListItemText primary="Home" />
+                    <ListItemText primary={t('navbar.home')} />
                   </ListItem>
                   <ListItem button component="a" href="#About" onClick={handleMenuClose}>
-                    <ListItemText primary="About" />
+                    <ListItemText primary={t('navbar.about')} />
                   </ListItem>
                   <ListItem button component="a" href="#Projects" onClick={handleMenuClose}>
-                    <ListItemText primary="Projects" />
+                    <ListItemText primary={t('navbar.projects')} />
                   </ListItem>
                   <ListItem button component="a" href="#Contact" onClick={handleMenuClose}>
-                    <ListItemText primary="Contact me" />
+                    <ListItemText primary={t('navbar.contact')} />
                   </ListItem>
                   <MaterialUISwitch
                   color="primary"
                   checked={darkMode}
                   onChange={toggleDarkMode}
                 />
+                <Button onClick={() => changeLanguage("en")}>EN</Button>
+                <Button onClick={() => changeLanguage("ru")}>RU</Button>
                 </List>
               </Drawer>
             </>
           ) : (
             <ButtonBox>
               <Box sx={{ fontWeight: 700 }}>
-                <ButtonLink href="#Hero">Home</ButtonLink>
-                <ButtonLink href="#About">About</ButtonLink>
-                <ButtonLink href="#Projects">Projects</ButtonLink>
-                <ButtonLink href="#Contact">Contact me</ButtonLink>
+                <ButtonLink href="#Hero">{t('navbar.home')}</ButtonLink>
+                <ButtonLink href="#About">{t('navbar.about')}</ButtonLink>
+                <ButtonLink href="#Projects">{t('navbar.projects')}</ButtonLink>
+                <ButtonLink href="#Contact">{t('navbar.contact')}</ButtonLink>
+                <Button onClick={() => changeLanguage("en")}>EN</Button>
+                <Button onClick={() => changeLanguage("ru")}>RU</Button>
                 <MaterialUISwitch
                   color="primary"
                   checked={darkMode}

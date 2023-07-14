@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Box, Typography, List, Link } from "@mui/material";
 import { MapTwoTone, Telegram } from "@mui/icons-material";
+import { useTranslation } from 'react-i18next';
 import { styled } from "@mui/system";
 
 const BoxWrapper = styled(Box)(({ theme }) => ({
@@ -62,15 +63,16 @@ const CustomLink = styled(Link)(({ theme }) => ({
 
 
 const Contact = () => {
+  const { t } = useTranslation();
   return (
     <BoxWrapper>
       <Container>
         <Box sx={{ p: 5 }}>
           <Typography variant="h6" component="h6" color="primary" fontWeight={600}>
-            Contact
+          {t('contact.contactheading')}
           </Typography>
           <ContactTitle variant="h4">
-            Don't be shy! Hit me up!
+          {t('contact.contacttitle')}
           </ContactTitle>
           <ListWrapper>
             <BlockWrapper>
@@ -79,10 +81,10 @@ const Contact = () => {
               </IconWrapper>
               <ContentWrapper>
                 <Typography variant="h6" fontWeight={600}>
-                  Location
+                {t('contact.location.title')}
                 </Typography>
                 <Typography variant="body1" fontWeight={500} color="text.secondary">
-                  Taganrog, Russia
+                  {t('contact.location.geo')}
                 </Typography>
               </ContentWrapper>
             </BlockWrapper>

@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from '@mui/system';
 import { Container, Box, Typography } from "@mui/material";
+import { useTranslation } from 'react-i18next';
 import { Telegram, GitHub } from "@mui/icons-material";
 
 const BoxWrapper = styled(Box) (({ theme }) => ({
@@ -56,12 +57,13 @@ const BoxIcon = styled(Box) ({
 
 const Contact = () => {
   const currentYear = new Date().getUTCFullYear();
+  const { t } = useTranslation();
   return (
       <BoxWrapper component="footer">
         <Container>
           <ContainerBox>
             <Copyright variant="h6">
-              &copy; {currentYear} sh1ckdev. All rights reserved.
+              &copy; {currentYear} {t('footer.copyright')}
             </Copyright>
             <BoxIcon>
               <GitHubIcon

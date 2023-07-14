@@ -11,6 +11,7 @@ import {
 import { WavingHandTwoTone, Telegram, GitHub } from "@mui/icons-material";
 import { styled } from "@mui/system";
 import { keyframes } from '@emotion/react';
+import { useTranslation } from 'react-i18next';
 import avatarImage from "../../assets/images/avatar.jpg";
 
 const BoxWrapper = styled(Box) (({theme}) => ({
@@ -94,7 +95,7 @@ const MainDesc = styled(Typography) (({ theme }) => ({
 
 const ContentBox = styled(Box) (({ theme }) =>({
   marginTop: "40px",
-  maxWidth: 500,
+  maxWidth: 550,
   [theme.breakpoints.down("md")]: {
     textAlign: 'center',
   }
@@ -170,6 +171,7 @@ const HeroCard = ({src, alt}) => {
 }
 
 const Hero = () => {
+  const { t } = useTranslation();
   const HeroData = [
     {
       src:  require("../../assets/images/html.svg").default,
@@ -203,12 +205,11 @@ const Hero = () => {
       <BoxWrapper id="Hero">
         <ContentBox>
           <MainText variant="h2" component="h2">
-            FrontEnd React Developer{" "}
+          {t('hero.maintext')}{" "}
             <WavingHandTwoToneIcon/>
           </MainText>
           <MainDesc>
-            Hi, I'm Alexey Cherman. A passionate Frontend Developer based in
-            Taganrog, Russia.
+          {t('hero.maindesc')}
           </MainDesc>
           <IconBox>
             <GitHubIcon
@@ -227,7 +228,7 @@ const Hero = () => {
       </BoxWrapper>
       <StackBox>
       <StackText>
-          My stack
+      {t('hero.steck')}
         </StackText>
         <Divider orientation={useMediaQuery((theme)=>theme.breakpoints.down("md")) ? "horizontal" : "vertical"} flexItem />
       <ListBox>
