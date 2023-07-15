@@ -11,30 +11,33 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemText,
-  useMediaQuery
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   position: "fixed",
   left: 0,
   right: 0,
-  maxWidth: '100vw',
+  maxWidth: "100vw",
   color: "inherit",
   backgroundColor: theme.palette.mode === "dark" ? "#131316" : "#fff",
   boxShadow: theme.shadows,
 }));
 
-const Toolbar = styled(MuiToolbar) ({
-  padding: 0
-})
+const Toolbar = styled(MuiToolbar)({
+  padding: 0,
+});
 
 const MenuIconButton = styled(IconButton)({
   marginRight: "0",
-  padding: 0
+  padding: 0,
 });
 
 const ButtonBox = styled(Box)({
@@ -66,14 +69,12 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       },
       "& + .MuiSwitch-track": {
         opacity: 1,
-        backgroundColor:
-          theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
+        backgroundColor: theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
       },
     },
   },
   "& .MuiSwitch-thumb": {
-    backgroundColor:
-      theme.palette.mode === "dark" ? "#003892" : "#fff921",
+    backgroundColor: theme.palette.mode === "dark" ? "#003892" : "#fff921",
     width: 32,
     height: 32,
     "&:before": {
@@ -92,13 +93,17 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
   "& .MuiSwitch-track": {
     opacity: 1,
-    backgroundColor:
-      theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
+    backgroundColor: theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
     borderRadius: 20 / 2,
   },
 }));
 
 const Navbar = ({ darkMode, toggleDarkMode }) => {
+  const [language, setLanguage] = useState("ru");
+
+  const handleChange = (event) => {
+    setLanguage(event.target.value);
+  };
   const { t, i18n } = useTranslation();
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
@@ -119,7 +124,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
       <Container maxWidth="lg">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography variant="h4" sx={{ fontFamily: "Rock Salt" }}>
-          shick .dev
+            shick .dev
           </Typography>
           {isMobile ? (
             <>
@@ -131,39 +136,94 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
               >
                 <MenuIcon />
               </MenuIconButton>
-              <Drawer anchor="right" open={isMenuOpen} onClose={handleMenuClose}>
+              <Drawer
+                anchor="right"
+                open={isMenuOpen}
+                onClose={handleMenuClose}
+              >
                 <List>
-                  <ListItem button component="a" href="#Hero" onClick={handleMenuClose}>
-                    <ListItemText primary={t('navbar.home')} />
+                  <ListItem
+                    button
+                    component="a"
+                    href="#Hero"
+                    onClick={handleMenuClose}
+                  >
+                <ButtonLink href="#Hero">{t("navbar.home")}</ButtonLink>
                   </ListItem>
-                  <ListItem button component="a" href="#About" onClick={handleMenuClose}>
-                    <ListItemText primary={t('navbar.about')} />
+                  <ListItem
+                    button
+                    component="a"
+                    href="#About"
+                    onClick={handleMenuClose}
+                  >
+                <ButtonLink href="#About">{t("navbar.about")}</ButtonLink>
                   </ListItem>
-                  <ListItem button component="a" href="#Projects" onClick={handleMenuClose}>
-                    <ListItemText primary={t('navbar.projects')} />
+                  <ListItem
+                    button
+                    component="a"
+                    href="#Projects"
+                    onClick={handleMenuClose}
+                  >
+                <ButtonLink href="#Projects">{t("navbar.projects")}</ButtonLink>
                   </ListItem>
-                  <ListItem button component="a" href="#Contact" onClick={handleMenuClose}>
-                    <ListItemText primary={t('navbar.contact')} />
+                  <ListItem
+                    button
+                    component="a"
+                    href="#Contact"
+                    onClick={handleMenuClose}
+                  >
+                <ButtonLink href="#Contact">{t("navbar.contact")}</ButtonLink>
                   </ListItem>
-                  <MaterialUISwitch
-                  color="primary"
-                  checked={darkMode}
-                  onChange={toggleDarkMode}
-                />
-                <Button onClick={() => changeLanguage("en")}>EN</Button>
-                <Button onClick={() => changeLanguage("ru")}>RU</Button>
+                  <ListItem button>
+                    <MaterialUISwitch
+                      color="primary"
+                      checked={darkMode}
+                      onChange={toggleDarkMode}
+                    />
+                  </ListItem>
+                  <ListItem button>
+                  <FormControl size="small">
+                    <InputLabel>Language</InputLabel>
+                    <Select
+                      id="demo-simple-select"
+                      value={language}
+                      label="Language"
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="en" onClick={() => changeLanguage("en")}>
+                        English
+                      </MenuItem>
+                      <MenuItem value="ru" onClick={() => changeLanguage("ru")}>
+                        Russian
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                  </ListItem>
                 </List>
               </Drawer>
             </>
           ) : (
             <ButtonBox>
               <Box sx={{ fontWeight: 700 }}>
-                <ButtonLink href="#Hero">{t('navbar.home')}</ButtonLink>
-                <ButtonLink href="#About">{t('navbar.about')}</ButtonLink>
-                <ButtonLink href="#Projects">{t('navbar.projects')}</ButtonLink>
-                <ButtonLink href="#Contact">{t('navbar.contact')}</ButtonLink>
-                <Button onClick={() => changeLanguage("en")}>EN</Button>
-                <Button onClick={() => changeLanguage("ru")}>RU</Button>
+                <ButtonLink href="#Hero">{t("navbar.home")}</ButtonLink>
+                <ButtonLink href="#About">{t("navbar.about")}</ButtonLink>
+                <ButtonLink href="#Projects">{t("navbar.projects")}</ButtonLink>
+                <ButtonLink href="#Contact">{t("navbar.contact")}</ButtonLink>
+                <FormControl size="small">
+                  <InputLabel>Language</InputLabel>
+                  <Select
+                    value={language}
+                    label="Language"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="en" onClick={() => changeLanguage("en")}>
+                      English
+                    </MenuItem>
+                    <MenuItem value="ru" onClick={() => changeLanguage("ru")}>
+                      Russian
+                    </MenuItem>
+                  </Select>
+                </FormControl>
                 <MaterialUISwitch
                   color="primary"
                   checked={darkMode}
