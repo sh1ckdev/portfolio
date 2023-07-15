@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import {
   AppBar as MuiAppBar,
   Toolbar as MuiToolbar,
@@ -18,6 +18,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Context } from "../../context";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTranslation } from "react-i18next";
 
@@ -98,26 +99,119 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const Navbar = ({ darkMode, toggleDarkMode }) => {
-  const [language, setLanguage] = useState("ru");
+function Navbar() {
+  const {
+    language,
+    handleChangeLanguage,
+    isMenuOpen,
+    handleMenuToggle,
+    handleMenuClose,
+    darkMode,
+    toggleDarkMode,
+  } = useContext(Context);
 
-  const handleChange = (event) => {
-    setLanguage(event.target.value);
-  };
-  const { t, i18n } = useTranslation();
-  const changeLanguage = (language) => {
-    i18n.changeLanguage(language);
-  };
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  const { t } = useTranslation();
 
-  const handleMenuToggle = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  function renderDesktopNavbar() {
+    return (
+      <ButtonBox>
+        <Box sx={{ fontWeight: 700 }}>
+          <ButtonLink href="#Hero">{t("navbar.home")}</ButtonLink>
+          <ButtonLink href="#About">{t("navbar.about")}</ButtonLink>
+          <ButtonLink href="#Projects">{t("navbar.projects")}</ButtonLink>
+          <ButtonLink href="#Contact">{t("navbar.contact")}</ButtonLink>
+          <FormControl size="small">
+            <InputLabel>Language</InputLabel>
+            <Select
+              value={language}
+              label="Language"
+              onChange={(e) => handleChangeLanguage(e.target.value)}
+            >
+              <MenuItem value="en">English</MenuItem>
+              <MenuItem value="ru">Russian</MenuItem>
+            </Select>
+          </FormControl>
+          <MaterialUISwitch
+            color="primary"
+            checked={darkMode}
+            onChange={toggleDarkMode}
+          />
+        </Box>
+      </ButtonBox>
+    );
+  }
 
-  const handleMenuClose = () => {
-    setIsMenuOpen(false);
-  };
+  function renderMobileNavbar() {
+    return (
+      <>
+        <MenuIconButton
+          color="inherit"
+          aria-label="Open menu"
+          edge="end"
+          onClick={handleMenuToggle}
+        >
+          <MenuIcon />
+        </MenuIconButton>
+        <Drawer anchor="right" open={isMenuOpen} onClose={handleMenuClose}>
+          <List>
+            <ListItem
+              button
+              component="a"
+              href="#Hero"
+              onClick={handleMenuClose}
+            >
+              <ButtonLink href="#Hero">{t("navbar.home")}</ButtonLink>
+            </ListItem>
+            <ListItem
+              button
+              component="a"
+              href="#About"
+              onClick={handleMenuClose}
+            >
+              <ButtonLink href="#About">{t("navbar.about")}</ButtonLink>
+            </ListItem>
+            <ListItem
+              button
+              component="a"
+              href="#Projects"
+              onClick={handleMenuClose}
+            >
+              <ButtonLink href="#Projects">{t("navbar.projects")}</ButtonLink>
+            </ListItem>
+            <ListItem
+              button
+              component="a"
+              href="#Contact"
+              onClick={handleMenuClose}
+            >
+              <ButtonLink href="#Contact">{t("navbar.contact")}</ButtonLink>
+            </ListItem>
+            <ListItem button>
+              <MaterialUISwitch
+                color="primary"
+                checked={darkMode}
+                onChange={toggleDarkMode}
+              />
+            </ListItem>
+            <ListItem button>
+              <FormControl size="small">
+                <InputLabel>Language</InputLabel>
+                <Select
+                  value={language}
+                  label="Language"
+                  onChange={(e) => handleChangeLanguage(e.target.value)}
+                >
+                  <MenuItem value="en">English</MenuItem>
+                  <MenuItem value="ru">Russian</MenuItem>
+                </Select>
+              </FormControl>
+            </ListItem>
+          </List>
+        </Drawer>
+      </>
+    );
+  }
 
   return (
     <AppBar component="header">
@@ -126,116 +220,11 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
           <Typography variant="h4" sx={{ fontFamily: "Rock Salt" }}>
             shick .dev
           </Typography>
-          {isMobile ? (
-            <>
-              <MenuIconButton
-                color="inherit"
-                aria-label="Open menu"
-                edge="end"
-                onClick={handleMenuToggle}
-              >
-                <MenuIcon />
-              </MenuIconButton>
-              <Drawer
-                anchor="right"
-                open={isMenuOpen}
-                onClose={handleMenuClose}
-              >
-                <List>
-                  <ListItem
-                    button
-                    component="a"
-                    href="#Hero"
-                    onClick={handleMenuClose}
-                  >
-                <ButtonLink href="#Hero">{t("navbar.home")}</ButtonLink>
-                  </ListItem>
-                  <ListItem
-                    button
-                    component="a"
-                    href="#About"
-                    onClick={handleMenuClose}
-                  >
-                <ButtonLink href="#About">{t("navbar.about")}</ButtonLink>
-                  </ListItem>
-                  <ListItem
-                    button
-                    component="a"
-                    href="#Projects"
-                    onClick={handleMenuClose}
-                  >
-                <ButtonLink href="#Projects">{t("navbar.projects")}</ButtonLink>
-                  </ListItem>
-                  <ListItem
-                    button
-                    component="a"
-                    href="#Contact"
-                    onClick={handleMenuClose}
-                  >
-                <ButtonLink href="#Contact">{t("navbar.contact")}</ButtonLink>
-                  </ListItem>
-                  <ListItem button>
-                    <MaterialUISwitch
-                      color="primary"
-                      checked={darkMode}
-                      onChange={toggleDarkMode}
-                    />
-                  </ListItem>
-                  <ListItem button>
-                  <FormControl size="small">
-                    <InputLabel>Language</InputLabel>
-                    <Select
-                      id="demo-simple-select"
-                      value={language}
-                      label="Language"
-                      onChange={handleChange}
-                    >
-                      <MenuItem value="en" onClick={() => changeLanguage("en")}>
-                        English
-                      </MenuItem>
-                      <MenuItem value="ru" onClick={() => changeLanguage("ru")}>
-                        Russian
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                  </ListItem>
-                </List>
-              </Drawer>
-            </>
-          ) : (
-            <ButtonBox>
-              <Box sx={{ fontWeight: 700 }}>
-                <ButtonLink href="#Hero">{t("navbar.home")}</ButtonLink>
-                <ButtonLink href="#About">{t("navbar.about")}</ButtonLink>
-                <ButtonLink href="#Projects">{t("navbar.projects")}</ButtonLink>
-                <ButtonLink href="#Contact">{t("navbar.contact")}</ButtonLink>
-                <FormControl size="small">
-                  <InputLabel>Language</InputLabel>
-                  <Select
-                    value={language}
-                    label="Language"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value="en" onClick={() => changeLanguage("en")}>
-                      English
-                    </MenuItem>
-                    <MenuItem value="ru" onClick={() => changeLanguage("ru")}>
-                      Russian
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-                <MaterialUISwitch
-                  color="primary"
-                  checked={darkMode}
-                  onChange={toggleDarkMode}
-                />
-              </Box>
-            </ButtonBox>
-          )}
+          {isMobile ? renderMobileNavbar() : renderDesktopNavbar()}
         </Toolbar>
       </Container>
     </AppBar>
   );
-};
+}
 
 export default Navbar;

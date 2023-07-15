@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import { styled } from '@mui/system';
 import { Container, Box, Typography } from "@mui/material";
 import { useTranslation } from 'react-i18next';
@@ -56,7 +56,7 @@ const BoxIcon = styled(Box) ({
 })
 
 const Contact = () => {
-  const currentYear = new Date().getUTCFullYear();
+  const currentYear = useMemo(() => new Date().getUTCFullYear(), []);
   const { t } = useTranslation();
   return (
       <BoxWrapper component="footer">
