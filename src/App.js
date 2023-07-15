@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext} from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material";
 import { Context } from "./context";
@@ -22,7 +22,7 @@ const App = () => {
   return (
     <React.Fragment>
       {loading ? (
-        <CircularProgress style={{ position: "absolute", top: "50%", left: "50%" }} />
+        <CircularProgress/>
       ) : (
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -33,7 +33,7 @@ const App = () => {
           <Contact />
           <Footer />
         </ThemeProvider>
-      )}
+      )} 
     </React.Fragment>
   );
 };

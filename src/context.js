@@ -13,15 +13,6 @@ export function ContextProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-
   //darkTheme
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -69,7 +60,8 @@ export function ContextProvider({ children }) {
       setLanguage("en");
       i18n.changeLanguage("en");
     }
-  }, [i18n])
+    setLoading(false);
+  }, [i18n]);
 
 
   //menu
