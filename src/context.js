@@ -13,6 +13,17 @@ export function ContextProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
 
+ //scroll
+  function handleScrollTo(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    const yOffset = -64; 
+    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+}
+
+
   //darkTheme
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -85,7 +96,8 @@ export function ContextProvider({ children }) {
         toggleDarkMode,
         prefersDarkMode,
         theme,
-        loading
+        loading,
+        handleScrollTo
       }}
     >
       {children}

@@ -65,7 +65,7 @@ const CustomLink = styled(Link)(({ theme }) => ({
 const Contact = () => {
   const { t } = useTranslation();
   return (
-    <BoxWrapper>
+    <BoxWrapper id="Contact">
       <Container>
         <Box sx={{ p: 5 }}>
           <Typography variant="h6" component="h6" color="primary" fontWeight={600}>

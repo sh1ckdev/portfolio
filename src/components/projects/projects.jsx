@@ -13,6 +13,9 @@ import { styled } from "@mui/system";
 import { LaunchRounded, GitHub } from "@mui/icons-material";
 import { useTranslation } from 'react-i18next';
 import ImageProjectFirst from "../../assets/images/coindom-full.png";
+import ImageProjectSecond from "../../assets/images/Carmark.png";
+import ImageProjectThird from "../../assets/images/VurtualReality.png";
+
 
 const BoxWrapper = styled(Box) (({theme}) =>({
   padding: "40px",
@@ -65,15 +68,13 @@ const ImageBox = styled(Box) (({ theme })=>({
   height: "300px",
 }))
 
-const Image = styled(CardMedia) ({
+const Image = styled(CardMedia)(({scroll, scrollY}) => ({
   width: "100%",
-  transform: "translateY(0%)",
-  transition: "transform 5s ease-in-out",
-  "&:hover": {
-    transform: "translateY(-79%)",
-  },
+  height: "auto",
   flexShrink: 0,
-})
+  transform: scroll ? `translateY(${scrollY})` : "translateY(0%)",
+  transition: "transform 10s ease-in-out",
+}))
 
 const ContentCard = styled(CardContent) ({
   flex: 1,
@@ -107,7 +108,12 @@ const ProjectCard = ({
   demoLink,
   stack,
   reverse,
+  scrollY
 }) => {
+
+
+  const [scroll, setScroll] = React.useState(false);
+
   const handleCodeLinkClick = () => {
     window.open(codeLink, "_blank");
   };
@@ -116,11 +122,24 @@ const ProjectCard = ({
     window.open(demoLink, "_blank");
   };
 
+
   return (
     <CardWrapper isReverse={reverse}>
       <ImageBox>
         <Link>
-          <Image component="img" image={image} />
+          <Image component="img" 
+          image={image}        
+          style={{
+            transform: scroll ? `translateY(${scrollY})` : "translateY(0%)",
+            transition: "transform 5s ease-in-out",
+          }}
+          scroll={scroll}
+          onMouseEnter={() => {
+            setScroll(true);
+          }}
+          onMouseLeave={() => {
+            setScroll(false);
+          }} />
         </Link>
       </ImageBox>
       <ContentCard>
@@ -157,6 +176,7 @@ const ProjectCard = ({
 
 const Projects = () => {
   const { t } = useTranslation();
+
   const projectData = [
     {
       image: ImageProjectFirst,
@@ -165,28 +185,31 @@ const Projects = () => {
       codeLink: "https://github.com/",
       demoLink: "https://",
       stack: ["React", "SCSS"],
+      scrollY: "-79%"
     },
     {
-      image: ImageProjectFirst,
+      image: ImageProjectSecond,
       title: t('projects.projectcard.project1.title'),
       description: t('projects.projectcard.project1.desc'),
       codeLink: "https://github.com/",
       demoLink: "https://",
       stack: ["React", "SCSS"],
+      scrollY: "-93%"
     },
     {
-      image: ImageProjectFirst,
+      image: ImageProjectThird,
       title: t('projects.projectcard.project1.title'),
       description: t('projects.projectcard.project1.desc'),
       codeLink: "https://github.com/",
       demoLink: "https://",
       stack: ["React", "SCSS"],
+      scrollY: "-83%"
     },
   ];
 
   return (
     <Container>
-      <BoxWrapper>
+      <BoxWrapper id="Projects">
         <ContentHeading variant="h6">
         {t('projects.projectsheading')}
         </ContentHeading>
@@ -205,6 +228,7 @@ const Projects = () => {
                 demoLink={project.demoLink}
                 stack={project.stack}
                 reverse={index % 2 !== 0}
+                scrollY={project.scrollY}
               />
             </Grid>
           ))}

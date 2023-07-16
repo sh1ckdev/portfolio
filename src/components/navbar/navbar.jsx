@@ -108,19 +108,21 @@ function Navbar() {
     handleMenuClose,
     darkMode,
     toggleDarkMode,
+    handleScrollTo
   } = useContext(Context);
 
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const { t } = useTranslation();
 
+
   function renderDesktopNavbar() {
     return (
       <ButtonBox>
         <Box sx={{ fontWeight: 700 }}>
-          <ButtonLink href="#Hero">{t("navbar.home")}</ButtonLink>
-          <ButtonLink href="#About">{t("navbar.about")}</ButtonLink>
-          <ButtonLink href="#Projects">{t("navbar.projects")}</ButtonLink>
-          <ButtonLink href="#Contact">{t("navbar.contact")}</ButtonLink>
+          <ButtonLink onClick={() => handleScrollTo("Hero")}>{t("navbar.home")}</ButtonLink>
+          <ButtonLink onClick={() => handleScrollTo("About")}>{t("navbar.about")}</ButtonLink>
+          <ButtonLink onClick={() => handleScrollTo("Projects")}>{t("navbar.projects")}</ButtonLink>
+          <ButtonLink onClick={() => handleScrollTo("Contact")}>{t("navbar.contact")}</ButtonLink>
           <FormControl size="small">
             <InputLabel>Language</InputLabel>
             <Select
@@ -217,7 +219,7 @@ function Navbar() {
     <AppBar component="header">
       <Container maxWidth="lg">
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Typography variant="h4" sx={{ fontFamily: "Rock Salt" }}>
+          <Typography  onClick={() => handleScrollTo("Hero")} variant="h4" sx={{ fontFamily: "Rock Salt", cursor: "pointer" }}>
             shick .dev
           </Typography>
           {isMobile ? renderMobileNavbar() : renderDesktopNavbar()}
