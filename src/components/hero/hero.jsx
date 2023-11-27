@@ -123,10 +123,10 @@ const TelegramIcon = styled(Telegram) (({ theme }) =>({
   }
 }))
 
-const IconBox = styled(Box) ({
+const IconBox = animated(styled(Box) ({
   display: 'inline-flex',
   gap: 10
-})
+}))
 
 const ListBox = styled(List) (({theme}) => ({
   display: "flex",
@@ -149,7 +149,7 @@ const StackText = styled(Typography) (({ theme }) => ({
   }
 }))
 
-const StackBox = styled(Box)(({ theme }) => ({
+const StackBox = animated(styled(Box)(({ theme }) => ({
   display: 'flex',
   padding: '20px',
   flexDirection: "row",
@@ -157,7 +157,7 @@ const StackBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("md")]:{
     flexDirection: "column",
   },
-}));
+})));
 
 
 const HeroCard = ({src, alt}) => {
@@ -177,21 +177,33 @@ const Hero = () => {
   const { t } = useTranslation();
 
   const MainTextAnimation = useSpring({
-    from: { opacity: 0, transform: 'translateY(-50px) translateX(-100px)' },
-    to: { opacity: 1, transform: 'translateY(0) translateX(0)' },
+    from: { opacity: 0, transform: ' translateX(-500px)' },
+    to: { opacity: 1, transform: ' translateX(0)' },
     config: { duration: 500 },
   });
 
   const MainDescAnimation = useSpring({
-    from: { opacity: 0, transform: 'translateX(-100px)' },
-    to: { opacity: 1, transform: 'translateY(0)' },
+    from: { opacity: 0, transform: 'translateX(-500px)' },
+    to: { opacity: 1, transform: 'translateX(0)' },
     config: { duration: 500 },
   });
 
   const imageAnimation = useSpring({
-    from: { opacity: 0, transform: 'scale(0.5) translateY(-200px)' },
-    to: { opacity: 1, transform: 'scale(1) translateY(0)' },
+    from: { opacity: 0, transform: ' translateX(500px)' },
+    to: { opacity: 1, transform: 'translateX(0)' },
     config: { duration: 50 },
+  });
+
+  const LinksAnimation = useSpring({
+    from: { opacity: 0, transform: 'scale(0.1) translateX(-500px)' },
+    to: { opacity: 1, transform: 'scale(1) translateX(0)' },
+    config: { duration: 500 },
+  });
+
+  const StackAnimation = useSpring({
+    from: { opacity: 0, transform: 'scale(0.1) translateY(300px)' },
+    to: { opacity: 1, transform: 'scale(1) translateY(0)' },
+    config: { duration: 500 },
   });
 
   const HeroData = [
@@ -233,7 +245,7 @@ const Hero = () => {
           <MainDesc style={MainDescAnimation}>
           {t('hero.maindesc')}
           </MainDesc>
-          <IconBox>
+          <IconBox style={LinksAnimation}>
             <GitHubIcon
               onClick={() => {
                 window.open("https://github.com/", "_blank");
@@ -248,7 +260,7 @@ const Hero = () => {
         </ContentBox>
         <AvatarAnimation style={imageAnimation} />
       </BoxWrapper>
-      <StackBox>
+      <StackBox style={StackAnimation}>
       <StackText>
       {t('hero.steck')}
         </StackText>
