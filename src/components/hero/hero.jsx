@@ -1,4 +1,5 @@
 import React from "react";
+import { useSpring, animated} from 'react-spring';
 import {
   Typography,
   Box,
@@ -49,7 +50,7 @@ const morphAnimation = keyframes`
   }
 `;
 
-const AvatarAnimation = styled(Box) (({theme}) =>({
+const AvatarAnimation = animated(styled(Box) (({theme}) =>({
   animation: `${morphAnimation} 8s ease-in-out infinite`,
   backgroundImage: `url(${avatarImage})`,
   backgroundPosition: "50%",
@@ -65,7 +66,7 @@ const AvatarAnimation = styled(Box) (({theme}) =>({
     width: "20rem",
     height: "20rem",
   }
-}));
+})));
 
 const WavingHandTwoToneIcon = styled(WavingHandTwoTone) (({ theme }) => ({
   color: theme.palette.primary.main,
@@ -75,23 +76,24 @@ const WavingHandTwoToneIcon = styled(WavingHandTwoTone) (({ theme }) => ({
   }
 }))
 
-const MainText = styled(Typography) (({ theme }) => ({
+
+const MainText = animated(styled(Typography) (({ theme }) => ({
   fontWeight: 600,
   fontSize: "4rem",
   color: theme.palette.text.primary,
   [theme.breakpoints.down("sm")]: {
     fontSize: "2rem"
   }
-}))
+})))
 
-const MainDesc = styled(Typography) (({ theme }) => ({
+const MainDesc = animated(styled(Typography) (({ theme }) => ({
   color: theme.palette.text.secondary,
   fontSize: "1.3rem",
   margin: "24px 0",
   [theme.breakpoints.down("sm")]: {
     fontSize: "1rem",
   }
-}))
+})))
 
 const ContentBox = styled(Box) (({ theme }) =>({
   marginTop: "40px",
@@ -170,8 +172,28 @@ const HeroCard = ({src, alt}) => {
   )
 }
 
+
 const Hero = () => {
   const { t } = useTranslation();
+
+  const MainTextAnimation = useSpring({
+    from: { opacity: 0, transform: 'translateY(-50px) translateX(-100px)' },
+    to: { opacity: 1, transform: 'translateY(0) translateX(0)' },
+    config: { duration: 500 },
+  });
+
+  const MainDescAnimation = useSpring({
+    from: { opacity: 0, transform: 'translateX(-100px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    config: { duration: 500 },
+  });
+
+  const imageAnimation = useSpring({
+    from: { opacity: 0, transform: 'scale(0.5) translateY(-200px)' },
+    to: { opacity: 1, transform: 'scale(1) translateY(0)' },
+    config: { duration: 50 },
+  });
+
   const HeroData = [
     {
       src:  require("../../assets/images/html.svg").default,
@@ -204,11 +226,11 @@ const Hero = () => {
     <Container maxWidth="lg">
       <BoxWrapper id="Hero">
         <ContentBox>
-          <MainText variant="h2" component="h2">
+          <MainText variant="h2" component="h2" style={MainTextAnimation}>
           {t('hero.maintext')}{" "}
             <WavingHandTwoToneIcon/>
           </MainText>
-          <MainDesc>
+          <MainDesc style={MainDescAnimation}>
           {t('hero.maindesc')}
           </MainDesc>
           <IconBox>
@@ -224,7 +246,7 @@ const Hero = () => {
             />
           </IconBox>
         </ContentBox>
-        <AvatarAnimation />
+        <AvatarAnimation style={imageAnimation} />
       </BoxWrapper>
       <StackBox>
       <StackText>

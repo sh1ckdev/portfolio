@@ -21,8 +21,10 @@ import { styled } from "@mui/material/styles";
 import { Context } from "../../context";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTranslation } from "react-i18next";
+import { useSpring, animated} from 'react-spring';
 
-const AppBar = styled(MuiAppBar)(({ theme }) => ({
+
+const AppBar = animated(styled(MuiAppBar)(({ theme }) => ({
   position: "fixed",
   left: 0,
   right: 0,
@@ -30,7 +32,7 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
   color: "inherit",
   backgroundColor: theme.palette.mode === "dark" ? "#131316" : "#fff",
   boxShadow: theme.shadows,
-}));
+})));
 
 const Toolbar = styled(MuiToolbar)({
   padding: 0,
@@ -114,6 +116,11 @@ function Navbar() {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const { t } = useTranslation();
 
+  const NavAnimate = useSpring({
+    from: { opacity: 0, transform: 'translateY(-100px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    config: { duration: 500 },
+  });
 
   function renderDesktopNavbar() {
     return (
@@ -216,7 +223,7 @@ function Navbar() {
   }
 
   return (
-    <AppBar component="header">
+    <AppBar style={NavAnimate} component="header">
       <Container maxWidth="lg">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography  onClick={() => handleScrollTo("Hero")} variant="h4" sx={{ fontFamily: "Rock Salt", cursor: "pointer" }}>
